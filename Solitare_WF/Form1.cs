@@ -285,7 +285,6 @@ namespace Solitare_WF
             }
             return false;
         }
-
         public void cardClick(object sender, EventArgs e)
         {
             bool isfirstT = true;
@@ -298,6 +297,7 @@ namespace Solitare_WF
             Console.WriteLine($"You clicked {(Card)selectedC.Tag}");
             bool isCardFromDealer = false;
             bool Replaceable = false;
+            bool moveToSlotAble = false;
             for (int i = 0; i < 7; i++)
             {
                 if (lines[i].Contains(selectedC))
@@ -307,6 +307,20 @@ namespace Solitare_WF
                         if (lines[i][j] == selectedC && j + 1 <= lines[i].Count - 1)
                         {
                             Replaceable = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                if (lines[i].Contains(glowingC))
+                {
+                    for (int j = 0; j < lines[i].Count; j++)
+                    {
+                        if (lines[i][j] == glowingC && j + 1 == lines[i].Count)
+                        {
+                            moveToSlotAble = true;
                             break;
                         }
                     }
@@ -332,7 +346,7 @@ namespace Solitare_WF
                     glowingC = null;
                     Console.WriteLine($"You removed the glow from {(Card)selectedC.Tag}");
                 }//Remove glow on same card
-                else if (deck.areDifferentcolors((Card)selectedC.Tag, (Card)glowingC.Tag) && (deck.areFollowingNum((Card)glowingC.Tag, (Card)selectedC.Tag)) && !Replaceable && !(selectedC.Location.X == 600 && selectedC.Location.Y == 50) && (!(selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb))))
+                else if (/* deck.areDifferentcolors((Card)selectedC.Tag, (Card)glowingC.Tag) && */(deck.areFollowingNum((Card)glowingC.Tag, (Card)selectedC.Tag)) && !Replaceable && !(selectedC.Location.X == 600 && selectedC.Location.Y == 50) && (!(selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb))))
                 {
                     Controls.Remove(glowPB);
                     for (int i = 0; i < dealer.Count; i++)
@@ -427,7 +441,7 @@ namespace Solitare_WF
                             break;
                         }
                     }//Move from dealer to slot
-                    if (!isCardFromDealer)
+                    if (!isCardFromDealer && moveToSlotAble)
                     {
                         glowingC.Location = new Point(selectedC.Location.X, selectedC.Location.Y);
                         glowingC.BringToFront();
@@ -714,3 +728,6 @@ namespace Solitare_WF
         }
     }
 }
+//BUGS:
+//
+//

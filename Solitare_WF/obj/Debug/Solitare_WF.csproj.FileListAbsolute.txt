@@ -38,3 +38,13 @@ C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.Gener
 C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.CoreCompileInputs.cache
 C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.exe
 C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.pdb
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\bin\Debug\Solitare_WF.exe.config
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\bin\Debug\Solitare_WF.exe
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\bin\Debug\Solitare_WF.pdb
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csprojAssemblyReference.cache
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.Form1.resources
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.Properties.Resources.resources
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.GenerateResource.cache
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.CoreCompileInputs.cache
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.exe
+D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.pdb
