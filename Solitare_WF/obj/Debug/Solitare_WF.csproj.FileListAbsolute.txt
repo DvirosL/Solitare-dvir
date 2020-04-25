@@ -28,3 +28,13 @@ D:\Code\Grade 10th\cardsgame\Solitare\Solitare\Solitare_WF\obj\Debug\Solitare_WF
 D:\Code\Grade 10th\cardsgame\Solitare\Solitare\Solitare_WF\obj\Debug\Solitare_WF.csproj.CoreCompileInputs.cache
 D:\Code\Grade 10th\cardsgame\Solitare\Solitare\Solitare_WF\obj\Debug\Solitare_WF.exe
 D:\Code\Grade 10th\cardsgame\Solitare\Solitare\Solitare_WF\obj\Debug\Solitare_WF.pdb
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\bin\Debug\Solitare_WF.exe.config
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\bin\Debug\Solitare_WF.exe
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\bin\Debug\Solitare_WF.pdb
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csprojAssemblyReference.cache
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.Form1.resources
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.Properties.Resources.resources
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.GenerateResource.cache
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.CoreCompileInputs.cache
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.exe
+C:\Users\yarin\gits\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.pdb

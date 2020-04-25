@@ -29,6 +29,7 @@ namespace Solitare_WF
         private PictureBox glowPB = new PictureBox();
         private PictureBox openCard = new PictureBox();
         private Label dealerCounterLabel = new Label();
+        private Label emptyDealerLabel = new Label();
         private PictureBox[] emptyCards = new PictureBox[7];
         private int slotSCount, slotHCount, slotDCount, slotCCount;
         private PictureBox slotSpb, slotHpb, slotDpb, slotCpb;
@@ -37,6 +38,7 @@ namespace Solitare_WF
         private Label movesCounterL = new Label();
         private string elapsedTime;
         private Random rnd = new Random();
+        private Button toggleTheme = new Button();
         public Form1()
         {
             InitializeComponent();
@@ -56,6 +58,13 @@ namespace Solitare_WF
                 movesCounterL.Height = 20;
                 movesCounterL.Text = $"{movesCounter}";
                 Controls.Add(movesCounterL);
+
+                GoDark();
+                toggleTheme.Text = "Go Light";
+                toggleTheme.Location = new Point(this.Size.Width / 2 - 100, 750);
+                toggleTheme.Size = new Size(200, 100);
+                toggleTheme.Click += ToggleTheme_Click;
+                Controls.Add(toggleTheme);
             } //Add Counters
             for (int i = 0; i < 7; i++)
             {
@@ -210,6 +219,17 @@ namespace Solitare_WF
                 }
             } //add the lines to the form
     }
+
+        private void ToggleTheme_Click(object sender, EventArgs e)
+        {
+            if (this.BackColor == Color.FromName("Black"))
+            {
+                GoLight();
+                return;
+            }
+            GoDark();
+        }
+
         public void buildSlotim()
         {
             for (int i = 0; i < 4; i++)
@@ -225,6 +245,47 @@ namespace Solitare_WF
                 Controls.Add(slotsPB[i]);
             }
         }
+
+        public void GoDark()
+        {
+            this.BackColor = Color.FromName("Black");
+            movesCounterL.ForeColor = Color.FromName("White");
+            dealerCounterLabel.ForeColor = Color.FromName("White");
+            emptyDealerLabel.ForeColor = Color.FromName("White");
+            toggleTheme.ForeColor = Color.FromName("White");
+            toggleTheme.BackColor = Color.FromArgb(30, 30, 30);
+            toggleTheme.Text = "Go Light";
+        }
+
+        public void GoLight()
+        {
+            this.BackColor = Color.FromName("White");
+            movesCounterL.ForeColor = Color.FromName("Black");
+            dealerCounterLabel.ForeColor = Color.FromName("Black");
+            emptyDealerLabel.ForeColor = Color.FromName("Black");
+            toggleTheme.ForeColor = Color.FromName("Black");
+            toggleTheme.BackColor = Color.FromName("White");
+            toggleTheme.Text = "Go Dark";
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F11)
+            {
+                if (FormBorderStyle == FormBorderStyle.Sizable)
+                {
+                    FormBorderStyle = FormBorderStyle.None;
+                    WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    FormBorderStyle = FormBorderStyle.Sizable;
+                    WindowState = FormWindowState.Normal;
+                }
+            }
+            return false;
+        }
+
         public void cardClick(object sender, EventArgs e)
         {
             bool isfirstT = true;
@@ -528,7 +589,6 @@ namespace Solitare_WF
                 {
                     Controls.Add(dealer[0]);
                     //Controls.Remove((PictureBox)dealer[dealer.Count - 1].Tag);
-                    Label emptyDealerLabel = new Label();
                     emptyDealerLabel.Location = new Point(480, 75);
                     emptyDealerLabel.Height = 50;
                     emptyDealerLabel.Width = 120;
