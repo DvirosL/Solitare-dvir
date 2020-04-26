@@ -221,7 +221,6 @@ namespace Solitare_WF
                 }
             } //add the lines to the form
     }
-
         private void ToggleTheme_Click(object sender, EventArgs e)
         {
             if (this.BackColor == Color.FromName("Black"))
@@ -231,7 +230,6 @@ namespace Solitare_WF
             }
             GoDark();
         }
-
         public void buildSlotim()
         {
             for (int i = 0; i < 4; i++)
@@ -247,7 +245,6 @@ namespace Solitare_WF
                 Controls.Add(slotsPB[i]);
             }
         }
-
         public void GoDark()
         {
             this.BackColor = Color.FromName("Black");
@@ -261,7 +258,6 @@ namespace Solitare_WF
             finish.BackColor = Color.FromArgb(30, 30, 30);
             toggleTheme.Text = "Go Light";
         }
-
         public void GoLight()
         {
             this.BackColor = SystemColors.Control;
@@ -275,7 +271,6 @@ namespace Solitare_WF
             finish.BackColor = SystemColors.Control;
             toggleTheme.Text = "Go Dark";
         }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.F11)
@@ -293,7 +288,6 @@ namespace Solitare_WF
             }
             return false;
         }
-
         public void cardClick(object sender, EventArgs e)
         {
             bool isfirstT = true;
@@ -355,7 +349,8 @@ namespace Solitare_WF
                     glowingC = null;
                     Console.WriteLine($"You removed the glow from {(Card)selectedC.Tag}");
                 }//Remove glow on same card
-                else if (deck.areDifferentcolors((Card)selectedC.Tag, (Card)glowingC.Tag) && (deck.areFollowingNum((Card)glowingC.Tag, (Card)selectedC.Tag)) && !Replaceable && !(selectedC.Location.X == 600 && selectedC.Location.Y == 50) && (!(selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb))))
+                //deck.areDifferentcolors((Card)selectedC.Tag, (Card)glowingC.Tag) && 
+                else if ((deck.areFollowingNum((Card)glowingC.Tag, (Card)selectedC.Tag)) && !Replaceable && !(selectedC.Location.X == 600 && selectedC.Location.Y == 50) && (!(selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb))))
                 {
                     Controls.Remove(glowPB);
                     for (int i = 0; i < dealer.Count; i++)
@@ -459,10 +454,7 @@ namespace Solitare_WF
                         {
                             if (lines[i].Contains(glowingC))
                             {
-                                for (int r = 0; r < lines[i].Count; r++)
-                                {
-                                    lines[i].Remove(glowingC);
-                                }
+                                lines[i].Remove(glowingC);
                                 if (lines[i].Count != 0)
                                 {
                                     try
@@ -516,7 +508,6 @@ namespace Solitare_WF
             if (glowingC != null) { Console.WriteLine($"GlowingC is {(Card)glowingC.Tag}"); }
             checkWin();
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             movesCounterL.Text = $"moves: {movesCounter}";
@@ -548,7 +539,7 @@ namespace Solitare_WF
                         cards[i].Location = new Point(860 + 130 * 3, 52);
                     }
                 }
-                Thread.Sleep(2000);
+                Thread.Sleep(10000);
                 elapsedTime = String.Format("{0:00}:{1:00}", playTime.Elapsed.Minutes, playTime.Elapsed.Seconds);
                 MessageBox.Show($"You've won the game!\nYour time was {elapsedTime}\nYou played {movesCounter} moves ", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Environment.Exit(Environment.ExitCode);
@@ -588,10 +579,14 @@ namespace Solitare_WF
                             lines[i].Remove(glowingC);
                             if (lines[i].Count != 0)
                             {
-                                lines[i][lines[i].Count - 1].Image = ((PictureBox)lines[i][lines[i].Count - 1].Tag).Image;
-                                lines[i][lines[i].Count - 1].Click += cardClick;
-                                lines[i][lines[i].Count - 1].Tag = ((PictureBox)lines[i][lines[i].Count - 1].Tag).Tag;
-                                bruhCount++;
+                                try
+                                {
+                                    lines[i][lines[i].Count - 1].Image = ((PictureBox)lines[i][lines[i].Count - 1].Tag).Image;
+                                    lines[i][lines[i].Count - 1].Click += cardClick;
+                                    lines[i][lines[i].Count - 1].Tag = ((PictureBox)lines[i][lines[i].Count - 1].Tag).Tag;
+                                    bruhCount++;
+                                }
+                                catch { }
                             }
                         }
                     }
