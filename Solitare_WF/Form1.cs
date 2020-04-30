@@ -220,15 +220,6 @@ namespace Solitare_WF
                     lines[i][j].BringToFront();
                 }
             } //add the lines to the form
-    }
-        private void ToggleTheme_Click(object sender, EventArgs e)
-        {
-            if (this.BackColor == Color.FromName("Black"))
-            {
-                GoLight();
-                return;
-            }
-            GoDark();
         }
         public void buildSlotim()
         {
@@ -288,6 +279,15 @@ namespace Solitare_WF
             }
             return false;
         }
+        private void ToggleTheme_Click(object sender, EventArgs e)
+        {
+            if (this.BackColor == Color.FromName("Black"))
+            {
+                GoLight();
+                return;
+            }
+            GoDark();
+        }
         public void cardClick(object sender, EventArgs e)
         {
             bool isfirstT = true;
@@ -331,15 +331,12 @@ namespace Solitare_WF
             }
             if (glowingC == null || glowingC.Tag == null)
             {
-                if(!(selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb)))
-                {
-                    glowImg = Resize(glowImg, 95, 145);
-                    glowPB.Location = new Point(selectedC.Location.X - 5, selectedC.Location.Y - 5);
-                    glowPB.Image = glowImg;
-                    glowPB.Size = glowImg.Size;
-                    Controls.Add(glowPB);
-                    glowingC = selectedC;
-                }
+                glowImg = Resize(glowImg, 95, 145);
+                glowPB.Location = new Point(selectedC.Location.X - 5, selectedC.Location.Y - 5);
+                glowPB.Image = glowImg;
+                glowPB.Size = glowImg.Size;
+                Controls.Add(glowPB);
+                glowingC = selectedC;
             }//Apply glow
             else
             {
@@ -349,8 +346,8 @@ namespace Solitare_WF
                     glowingC = null;
                     Console.WriteLine($"You removed the glow from {(Card)selectedC.Tag}");
                 }//Remove glow on same card
-                //deck.areDifferentcolors((Card)selectedC.Tag, (Card)glowingC.Tag) && 
-                else if ((deck.areFollowingNum((Card)glowingC.Tag, (Card)selectedC.Tag)) && !Replaceable && !(selectedC.Location.X == 600 && selectedC.Location.Y == 50) && (!(selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb))))
+                
+                else if (deck.areDifferentcolors((Card)selectedC.Tag, (Card)glowingC.Tag) && (deck.areFollowingNum((Card)glowingC.Tag, (Card)selectedC.Tag)) && !Replaceable && !(selectedC.Location.X == 600 && selectedC.Location.Y == 50) && (!(selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb))))
                 {
                     Controls.Remove(glowPB);
                     for (int i = 0; i < dealer.Count; i++)
@@ -360,7 +357,7 @@ namespace Solitare_WF
                             glowingC.Location = new Point(selectedC.Location.X, selectedC.Location.Y + 20);
                             glowingC.BringToFront();
                             Console.WriteLine($"You moved {(Card)glowingC.Tag} from the dealer to under {(Card)selectedC.Tag}");
-                            openCard = null; 
+                            openCard = null;
                             isCardFromDealer = true;
                             for (int j = 0; j < 7; j++)
                             {
@@ -371,11 +368,14 @@ namespace Solitare_WF
                             }
                             Controls.Remove(dealer[i]);
                             dealer.Remove(dealer[i]);
-                            glowingC = null;
                             break;
                         }
                     }//Move Card from dealer
-                    if (!isCardFromDealer)
+                    if ((glowingC.Equals(slotSpb) || glowingC.Equals(slotHpb) || glowingC.Equals(slotDpb) || glowingC.Equals(slotCpb)) && !isCardFromDealer)
+                    {
+                        removeFromSlots(selectedC);
+                    }
+                    else if (!isCardFromDealer)
                     {
                         int j, k = 0;
                         PictureBox[] tempCs = new PictureBox[0];
@@ -425,9 +425,9 @@ namespace Solitare_WF
                         }
                         k = 0;
                         Console.WriteLine($"You moved {(Card)glowingC.Tag} and {tempCs.Length - 1} other Cards to under {(Card)selectedC.Tag}");
-                        glowingC = null;
                     } //Move Cards from line to line
                     movesCounter++;
+                    glowingC = null;
                 }
                 else if (((Card)selectedC.Tag).getNum() == ((Card)glowingC.Tag).getNum() - 1 && (((Card)selectedC.Tag).getType() == ((Card)glowingC.Tag).getType()) && (selectedC.Equals(slotSpb) || selectedC.Equals(slotHpb) || selectedC.Equals(slotDpb) || selectedC.Equals(slotCpb)))
                 {
@@ -514,36 +514,39 @@ namespace Solitare_WF
         }
         public void finishClick(object sender, EventArgs e)
         {
-            for(int i = 0; i < 52; i++)
+            elapsedTime = String.Format("{0:00}:{1:00}", playTime.Elapsed.Minutes, playTime.Elapsed.Seconds);
+            for (int i = 0; i < 52; i++)
             {
-                if(((Card)cards[i].Tag).getNum() != 13)
+                foreach (Control PB in this.Controls)
                 {
-                    Controls.Remove(cards[i]);
+                    if (PB.Tag != null && ((PB.Tag).GetType() == typeof(Card)))
+                    {
+                        if (((Card)PB.Tag).getNum() != 13)
+                        {
+                            Controls.Remove(PB);
+                            Thread.Sleep(100);
+                        }
+                        else if (((Card)PB.Tag).getType() == "Spade")
+                        {
+                            PB.Location = new Point(860, 52);
+                        }
+                        else if (((Card)PB.Tag).getType() == "Heart")
+                        {
+                            PB.Location = new Point(860 + 130, 52);
+                        }
+                        else if (((Card)PB.Tag).getType() == "Diamond")
+                        {
+                            PB.Location = new Point(860 + 130 * 2, 52);
+                        }
+                        else if (((Card)PB.Tag).getType() == "Club")
+                        {
+                            PB.Location = new Point(860 + 130 * 3, 52);
+                        }
+                    }
                 }
-                else
-                {
-                    if(((Card)cards[i].Tag).getType() == "Spade")
-                    {
-                        cards[i].Location = new Point(860, 52);
-                    }
-                    else if (((Card)cards[i].Tag).getType() == "Heart")
-                    {
-                        cards[i].Location = new Point(860 + 130, 52);
-                    }
-                    else if (((Card)cards[i].Tag).getType() == "Diamond")
-                    {
-                        cards[i].Location = new Point(860 + 130 * 2, 52);
-                    }
-                    else if (((Card)cards[i].Tag).getType() == "Club")
-                    {
-                        cards[i].Location = new Point(860 + 130 * 3, 52);
-                    }
-                }
-                Thread.Sleep(10000);
-                elapsedTime = String.Format("{0:00}:{1:00}", playTime.Elapsed.Minutes, playTime.Elapsed.Seconds);
-                MessageBox.Show($"You've won the game!\nYour time was {elapsedTime}\nYou played {movesCounter} moves ", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Environment.Exit(Environment.ExitCode);
             }
+            MessageBox.Show($"You've won the game!\nYour time was {elapsedTime}\nYou played {movesCounter} moves ", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Environment.Exit(Environment.ExitCode);
         }
         public void slotClick(object sender, EventArgs e)
         {
@@ -778,6 +781,76 @@ namespace Solitare_WF
                 MessageBox.Show($"You've won the game!\nYour time was {elapsedTime}\nYou played {movesCounter} moves ", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Environment.Exit(Environment.ExitCode);
             }
+        }
+        public void removeFromSlots(PictureBox selectedC)
+        {
+            Console.WriteLine($"You moved {(Card)glowingC.Tag} from the slots to under {(Card)selectedC.Tag}");
+            for (int j = 0; j < 7; j++)
+            {
+                if (lines[j].Contains(selectedC))
+                {
+                    lines[j].Add(glowingC);
+                }
+            }
+            PictureBox tempPB = new PictureBox();
+            if(((Card)glowingC.Tag).getNum() != 1)
+            {
+                Card prevC = new Card(((Card)glowingC.Tag).getNum() - 1, ((Card)glowingC.Tag).getType());
+                foreach (Control PB in this.Controls)
+                {
+                    if (PB.Tag != null && ((PB.Tag).GetType() == typeof(Card)) && ((Card)PB.Tag).getType() == prevC.getType() && ((Card)PB.Tag).getNum() == prevC.getNum())
+                    {
+                        tempPB = (PictureBox)PB;
+                        break;
+                    }
+                }
+                if (((Card)glowingC.Tag).getType() == "Spade")
+                {
+                    slotSCount--;
+                    slotSpb = tempPB;
+                }
+                else if (((Card)glowingC.Tag).getType() == "Heart")
+                {
+                    slotHCount--;
+                    slotHpb = tempPB;
+                }
+                else if (((Card)glowingC.Tag).getType() == "Diamond")
+                {
+                    slotDCount--;
+                    slotDpb = tempPB;
+                }
+                else if (((Card)glowingC.Tag).getType() == "Club")
+                {
+                    slotCCount--;
+                    slotCpb = tempPB;
+                }
+            }
+            else
+            {
+                if (((Card)selectedC.Tag).getType() == "Spade")
+                {
+                    slotSCount--;
+                    slotSpb = null;
+                }
+                else if (((Card)selectedC.Tag).getType() == "Heart")
+                {
+                    slotHCount--;
+                    slotHpb = null;
+                }
+                else if (((Card)selectedC.Tag).getType() == "Diamond")
+                {
+                    slotDCount--;
+                    slotDpb = null;
+                }
+                else if (((Card)selectedC.Tag).getType() == "Club")
+                {
+                    slotCCount--;
+                    slotCpb = null;
+                }
+            }
+            glowingC.Location = new Point(selectedC.Location.X, selectedC.Location.Y + 20);
+            glowingC.BringToFront();
+            glowingC = null;
         }
         public Image Resize(Image image, int w, int h)
         {
