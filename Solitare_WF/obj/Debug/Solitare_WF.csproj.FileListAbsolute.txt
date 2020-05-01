@@ -48,3 +48,13 @@ D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj
 D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.CoreCompileInputs.cache
 D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.exe
 D:\Code\Finished projects\Solitare-dvir\Solitare_WF\obj\Debug\Solitare_WF.pdb
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\bin\Debug\Solitare_WF.exe.config
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\bin\Debug\Solitare_WF.exe
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\bin\Debug\Solitare_WF.pdb
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\obj\Debug\Solitare_WF.csprojAssemblyReference.cache
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\obj\Debug\Solitare_WF.Form1.resources
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\obj\Debug\Solitare_WF.Properties.Resources.resources
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.GenerateResource.cache
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\obj\Debug\Solitare_WF.csproj.CoreCompileInputs.cache
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\obj\Debug\Solitare_WF.exe
+D:\Code\Finished projects\Solitaire dvir\Solitare_WF\obj\Debug\Solitare_WF.pdb
